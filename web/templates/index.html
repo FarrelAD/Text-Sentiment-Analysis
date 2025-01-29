@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <form action="/check-sentiment" method="post" id="text-form" class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold mb-4 text-center">Sentiment Analysis</h2>
+        <textarea id="userText" class="w-full p-2 border rounded resize-none focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter your text here..."></textarea>
+        <button type="submit" class="mt-4 w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Check Sentiment</button>
+        <p id="result" class="mt-4 text-center font-semibold"></p>
+    </form>
+
+    <script>
+        const textForm = document.getElementById('text-form');
+        const result = document.getElementById('result');
+
+        textForm.addEventListener('submit', async function(e) {
+            e.preventDefault()
+
+            const formData = FormData(this)
+
+            try {
+                const response = await fetch(this.action, {
+                    method: this.method,
+                    body: formData
+                })
+
+                result.textContent = response
+            } catch (error) {
+                console.error(error)
+                alert('There is something error in the server!')
+            }
+        })
+    </script>
+</body>
+</html>
