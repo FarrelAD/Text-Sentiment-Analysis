@@ -5,6 +5,7 @@ import os
 app = Flask(__name__)
 
 app.config['TEMPLATES_FOLDER'] = 'templates'
+app.config['STATIC_FOLDER'] = 'static'
 
 
 pipeline = joblib.load(os.path.join('..', 'model', 'sentiment_analysis_pipeline.pkl'))

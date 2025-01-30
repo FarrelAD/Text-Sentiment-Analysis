@@ -9,38 +9,34 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <form action="/check-sentiment" method="post" id="text-form" class="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 class="text-2xl font-bold mb-4 text-center">Sentiment Analysis</h2>
-        <textarea id="userText" name="text" class="w-full p-2 border rounded resize-none focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter your text here..."></textarea>
+        <textarea id="userText" name="text" class="w-full p-2 border rounded resize-none focus:outline-none focus:ring focus:ring-blue-300" rows="10" placeholder="Enter your text here..."></textarea>
+
+        <div class="mb-6">
+            <p class="text-xl font-semibold text-gray-700 text-center mb-4">Choose processing method:</p>
+            <div class="flex justify-center space-x-12">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="processing" value="client" class="hidden peer" checked>
+                    <span class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center peer-checked:bg-blue-500 transition-all duration-300">
+                        <span class="w-4 h-4 bg-white rounded-full peer-checked:bg-white"></span>
+                    </span>
+                    <span class="text-gray-700 font-medium">Client</span>
+                </label>
+                
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="processing" value="server" class="hidden peer">
+                    <span class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center peer-checked:bg-blue-500 transition-all duration-300">
+                        <span class="w-4 h-4 bg-white rounded-full peer-checked:bg-white"></span>
+                    </span>
+                    <span class="text-gray-700 font-medium">Server</span>
+                </label>
+            </div>
+        </div>
+
         <button type="submit" class="mt-4 w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Check Sentiment</button>
         <p id="result" class="mt-4 text-center font-semibold"></p>
     </form>
 
-    <script>
-        const textForm = document.getElementById('text-form');
-        const result = document.getElementById('result');
-
-        textForm.addEventListener('submit', async function(e) {
-            e.preventDefault()
-
-            const formData = new FormData(this)
-
-            try {
-                const response = await fetch(this.action, {
-                    method: this.method,
-                    body: formData
-                })
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                result.textContent = data.sentiment
-            } catch (error) {
-                console.error(error)
-                alert('There is something error in the server!')
-            }
-        })
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxjs@0.1.8/dist/onnx.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
