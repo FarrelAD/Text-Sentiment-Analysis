@@ -9,7 +9,7 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <form action="/check-sentiment" method="post" id="text-form" class="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 class="text-2xl font-bold mb-4 text-center">Sentiment Analysis</h2>
-        <textarea id="userText" class="w-full p-2 border rounded resize-none focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter your text here..."></textarea>
+        <textarea id="userText" name="text" class="w-full p-2 border rounded resize-none focus:outline-none focus:ring focus:ring-blue-300" placeholder="Enter your text here..."></textarea>
         <button type="submit" class="mt-4 w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Check Sentiment</button>
         <p id="result" class="mt-4 text-center font-semibold"></p>
     </form>
@@ -21,7 +21,7 @@
         textForm.addEventListener('submit', async function(e) {
             e.preventDefault()
 
-            const formData = FormData(this)
+            const formData = new FormData(this)
 
             try {
                 const response = await fetch(this.action, {
@@ -29,7 +29,13 @@
                     body: formData
                 })
 
-                result.textContent = response
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                result.textContent = data.sentiment
             } catch (error) {
                 console.error(error)
                 alert('There is something error in the server!')
