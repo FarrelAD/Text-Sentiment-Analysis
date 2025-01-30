@@ -1,12 +1,13 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import joblib
+import os
 
 app = Flask(__name__)
 
 app.config['TEMPLATES_FOLDER'] = 'templates'
 
 
-# model = joblib.load('model/sentiment_model.pkl')
+pipeline = joblib.load(os.path.join('..', 'model', 'sentiment_analysis_pipeline.pkl'))
 
 
 @app.route('/', methods=['GET'])
@@ -15,9 +16,11 @@ def index():
 
 @app.route('/check-sentiment', methods=['POST'])
 def check_sentiment():
-    sentiment = model.predict('I am good')
+    text = request.form['text']
     
-    return jsonify({'sentiment': sentiment})
+    sentiment = pipeline.predict([text])[0]
+    
+    return jsonify({'sentiment': "Positive" if sentiment == 1 else "Negative"})
 
 
 if __name__ == '__main__':
