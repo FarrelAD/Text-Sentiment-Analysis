@@ -1,4 +1,14 @@
 # Text-Sentiment-Analysis
+
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://github.com/topics/python)
+[![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white)](https://github.com/topics/pandas)
+[![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white)](https://github.com/topics/numpy)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat&logo=scikit-learn&logoColor=white)](https://github.com/topics/scikit-learn)
+[![Sentiment Analysis](https://img.shields.io/badge/Sentiment_Analysis-FF4081?style=flat)](https://github.com/topics/sentiment-analysis)
+[![NLP](https://img.shields.io/badge/NLP-6200EA?style=flat)](https://github.com/topics/nlp)
+[![Logistic Regression](https://img.shields.io/badge/Logistic_Regression-00B0D7?style=flat)](https://github.com/topics/logistic-regression)
+
+
 This is a simple project that implements text sentiment analysis. Sentiment analysis is a machine learning technique that determines whether a given text expresses a positive or negative sentiment. Based on the user's input, the model classifies the text and outputs either "positive" or "negative."
 
 ## Algorithm ⚙️
